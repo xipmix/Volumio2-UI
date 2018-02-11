@@ -48,9 +48,13 @@ import FavouriteTrackBtnDirective from './components/favourite-track-btn/favouri
 import AddTrackToPlaylistBtnDirective from './components/add-track-to-playlist-btn/add-track-to-playlist-btn.directive';
 import TrackAciotnsBtnDirective from './components/track-actions-btn/track-actions-btn.directive';
 
+// Light Switch
+import LightSwitchBtnDirective from './components/light-switch-btn/light-switch-btn.directive';
+
 //Directives
 import PluginAttributesDirective from './plugin/components/plugin-attributes.directive';
 import PluginVisibleDirective from './plugin/components/plugin-visible.directive';
+import PluginComponent from './plugin/components/plugin.component';
 
 // Controllers
 import HeaderController from './header/header.controller';
@@ -68,6 +72,8 @@ import PlayQueueController from './play-queue/play-queue.controller';
 import PluginController from './plugin/plugin.controller';
 import PluginManagerController from './plugin-manager/plugin-manager.controller';
 
+import WizardController from './wizard/wizard.controller';
+
 //Modals
 import ModalPlaylistController from './browse/components/modal/modal-playlist.controller';
 import ModalWebRadioController from './browse/components/modal/modal-web-radio.controller';
@@ -75,6 +81,7 @@ import ModalPowerOffController from './components/side-menu/elements/modal-power
 import ModalSleepController from './components/side-menu/elements/modal-sleep.controller';
 import ModalAlarmClockController from './components/side-menu/elements/modal-alarm-clock.controller';
 import ModalUpdaterController from './components/modals/modal-updater.controller';
+import ModalProgressCustomController from './components/modals/modal-progress.controller';
 import ModalGotitController from './components/modals/modal-gotit.controller';
 import ModalConfirmController from './components/modals/modal-confirm.controller';
 import ModalRipperController from './components/modals/modal-ripper.controller';
@@ -85,6 +92,7 @@ import ModalPluginInstallerController from './plugin-manager/components/modals/m
 import ModalTrackManagerActionsController from
   './components/track-manager/components/modals/modal-track-manager-actions.controller';
 import ModalNetwordDrivesPasswordController from './plugin/core-plugin/modals/modal-network-drive-password.controller';
+import ModalCryptoController from './components/modals/modal-crypto.controller';
 
 
 //Core plugin controller
@@ -116,7 +124,7 @@ angular.module('volumio', [
   'ngFileUpload',
   'pascalprecht.translate',
   'LocalStorageModule',
-
+  'cg.mailchimp',
   //Angular core modules
   // 'ngAnimate',
   // 'ngCookies',
@@ -177,6 +185,7 @@ angular.module('volumio', [
   .directive('favouriteTrackBtn', (themeManager) => new FavouriteTrackBtnDirective(themeManager))
   .directive('addTrackToPlaylistBtn', (themeManager) => new AddTrackToPlaylistBtnDirective(themeManager))
   .directive('trackActionsBtn', (themeManager) => new TrackAciotnsBtnDirective(themeManager))
+  .directive('lightSwitchBtn', (themeManager) => new LightSwitchBtnDirective(themeManager))
 
   .controller('HeaderController', HeaderController)
   .controller('LayoutController', LayoutController)
@@ -188,10 +197,13 @@ angular.module('volumio', [
 
   .controller('PluginController', PluginController)
   .controller('PluginManagerController', PluginManagerController)
+  .component('pluginComponent', new PluginComponent())
 
   .controller('BrowseController', BrowseController)
   .controller('PlaybackController', PlaybackController)
   .controller('PlayQueueController', PlayQueueController)
+
+  .controller('WizardController', WizardController)
 
   .controller('ModalController', ModalController)
   .controller('ModalPlaylistController', ModalPlaylistController)
@@ -200,6 +212,7 @@ angular.module('volumio', [
   .controller('ModalSleepController', ModalSleepController)
   .controller('ModalAlarmClockController', ModalAlarmClockController)
   .controller('ModalUpdaterController', ModalUpdaterController)
+  .controller('ModalProgressCustomController', ModalProgressCustomController)
   .controller('ModalGotitController', ModalGotitController)
   .controller('ModalConfirmController', ModalConfirmController)
   .controller('ModalRipperController', ModalRipperController)
@@ -209,6 +222,7 @@ angular.module('volumio', [
   .controller('ModalPluginInstallerController', ModalPluginInstallerController)
   .controller('ModalTrackManagerActionsController', ModalTrackManagerActionsController)
   .controller('ModalNetwordDrivesPasswordController', ModalNetwordDrivesPasswordController)
+  .controller('ModalCryptoController', ModalCryptoController)
 
 
   .controller('WifiPluginController',  WifiPluginController)

@@ -52,10 +52,21 @@ class BrowseService {
     this.$log.debug('fetchLibrary', obj);
     this.currentFetchRequest = item;
     this.socketService.emit('browseLibrary', obj);
-    this.isBrowsing = true;
+    if (!item.static) {
+      this.isBrowsing = true;
+    }
     if (!back) {
       this.scrollPositions.delete(item.uri);
     }
+  }
+
+  sendEject(data) {
+    this.socketService.emit('callMethod', data);
+    this.backHome();
+  }
+
+  sendRip(data) {
+    this.socketService.emit('callMethod', data);
   }
 
   backHome() {
@@ -188,8 +199,11 @@ class BrowseService {
       if (data.navigation) {
         this.$log.debug('pushBrowseLibrary', data);
         this.lists = data.navigation.lists;
+        this.info = data.navigation.info;
 
         this.breadcrumbs = data.navigation.prev;
+        this.eject = data.navigation.eject;
+        this.rip = data.navigation.rip;
 
         this.$rootScope.$broadcast('browseService:fetchEnd');
       }
